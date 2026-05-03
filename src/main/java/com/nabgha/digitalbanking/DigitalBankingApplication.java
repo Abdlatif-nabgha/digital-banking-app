@@ -1,4 +1,4 @@
-package com.nabgha.digitalbanking;
+package com.nabgha.digitalbanking.DigitalBankingApplication;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;

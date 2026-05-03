@@ -1,6 +1,5 @@
 package com.nabgha.digitalbanking.dtos.responses;
 
-
 import com.nabgha.digitalbanking.enums.AccountStatus;
 import com.nabgha.digitalbanking.enums.Currency;
 
@@ -18,6 +17,5 @@ public record AccountResponseDTO(
         double interestRate,  // 0 si CurrentAccount
         UUID customerId,
         String customerName
-
 ) {
 }
