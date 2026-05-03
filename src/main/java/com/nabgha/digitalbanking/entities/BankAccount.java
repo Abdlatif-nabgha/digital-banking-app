@@ -2,7 +2,6 @@ package com.nabgha.digitalbanking.entities;
 
 
 import com.nabgha.digitalbanking.enums.AccountStatus;
-import com.nabgha.digitalbanking.enums.Currency;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,9 +27,8 @@ public class BankAccount {
     @Column(name = "status")
     private AccountStatus status;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "currency")
-    private Currency currency;
+    private String currency;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

@@ -24,12 +24,12 @@ public class Operation {
     @Column(name = "amount")
     private double amount;
 
+    @Column(name = "description")
+    private String description;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "operation_type")
     private OperationType type;
-
-    @Column(name = "description")
-    private String description;
 
     @ManyToOne
     @JoinColumn(name = "bank_account_id")
