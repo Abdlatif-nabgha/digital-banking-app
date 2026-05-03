@@ -28,6 +28,9 @@ public class Operation {
     @Column(name = "operation_type")
     private OperationType type;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "bank_account_id")
     private BankAccount bankAccount;
