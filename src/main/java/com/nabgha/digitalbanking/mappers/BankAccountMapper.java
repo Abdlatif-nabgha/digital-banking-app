@@ -35,7 +35,6 @@ public interface BankAccountMapper {
             return savingAccountToDto(savingAccount);
         }
         throw new  IllegalArgumentException("Unknown account type: " + bankAccount.getClass());
-
     }
 
     // List<BankAccount> → List<AccountResponseDTO>
