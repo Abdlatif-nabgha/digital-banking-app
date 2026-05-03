@@ -1,11 +1,5 @@
 package com.nabgha.digitalbanking.dtos.responses;
 
-<<<<<<< HEAD
-
-import java.util.UUID;
-
-public record AccountResponseDTO(UUID id, double balance, String type, CustomerResponseDTO customer){}
-=======
 import com.nabgha.digitalbanking.enums.AccountStatus;
 import com.nabgha.digitalbanking.enums.Currency;
 
@@ -25,4 +19,3 @@ public record AccountResponseDTO(
         String customerName
 ) {
 }
->>>>>>> main
