@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,5 +49,19 @@ public class CustomerController {
         return ResponseEntity.ok(ApiResponse.success(bankAccountService.searchCustomers(keyword), "OK"));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<CustomerResponseDTO>> update(
+           @PathVariable UUID id,
+           @RequestBody @Valid CustomerRequestDTO request
+    ) throws CustomerNotFoundException {
+        return ResponseEntity.ok(ApiResponse.success(bankAccountService.updateCustomer(id, request), "Customer updated successfully"));
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> delete(
+            @PathVariable UUID id
+    ) throws CustomerNotFoundException {
+        bankAccountService.deleteCustomer(id);
+        return ResponseEntity.ok(ApiResponse.success("Customer deleted successfully"));
+    }
 }
