@@ -13,4 +13,5 @@ import java.util.UUID;
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     Page<Customer> findByNameContainingIgnoreCase(String keyword, Pageable pageable);
     List<Customer> findByNameContainingIgnoreCase(String keyword);
+
 }
