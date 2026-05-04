@@ -1,6 +1,14 @@
 package com.nabgha.digitalbanking.dtos.requests;
 
 
-import java.util.UUID;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
-public record TransferRequestDTO(UUID sourceId, UUID destinationId, double amount, String description){}
+import java.util.UUID;
+public record TransferRequestDTO(
+        @NotNull UUID sourceId,
+        @NotNull UUID destinationId,
+        @Positive(message = "Amount must be positive")
+        double amount,
+        String description
+) {}

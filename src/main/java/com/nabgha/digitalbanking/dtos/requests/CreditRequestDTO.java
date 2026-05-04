@@ -1,6 +1,14 @@
 package com.nabgha.digitalbanking.dtos.requests;
 
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import java.util.UUID;
 
-public record CreditRequestDTO(UUID accountId, double amount, String description){}
+public record CreditRequestDTO(
+        @NotNull UUID accountId,
+        @Positive(message = "Amount must be positive")
+        double amount,
+        String description
+) {}
