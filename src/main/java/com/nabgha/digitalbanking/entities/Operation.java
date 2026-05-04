@@ -20,7 +20,6 @@ public class Operation {
 
     @Column(name = "operation_date")
     private LocalDateTime date;
-
     @Column(name = "amount")
     private double amount;
 

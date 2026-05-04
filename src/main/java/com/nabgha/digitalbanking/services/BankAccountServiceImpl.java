@@ -6,6 +6,7 @@ import com.nabgha.digitalbanking.dtos.responses.AccountResponseDTO;
 import com.nabgha.digitalbanking.dtos.responses.CustomerResponseDTO;
 import com.nabgha.digitalbanking.entities.*;
 import com.nabgha.digitalbanking.enums.AccountStatus;
+import com.nabgha.digitalbanking.enums.Currency;
 import com.nabgha.digitalbanking.enums.OperationType;
 import com.nabgha.digitalbanking.exceptions.BalanceNotSufficientException;
 import com.nabgha.digitalbanking.exceptions.BankAccountNotFoundException;
@@ -131,6 +132,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         currentAccount.setCreatedAt(LocalDateTime.now());
         currentAccount.setBalance(initialBalance);
         currentAccount.setStatus(AccountStatus.CREATED);
+        currentAccount.setCurrency(Currency.MAD);
         currentAccount.setCustomer(customer);
         currentAccount.setOverDraft(overDraft);
 
@@ -153,6 +155,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         savingAccount.setCreatedAt(LocalDateTime.now());
         savingAccount.setBalance(initialBalance);
         savingAccount.setStatus(AccountStatus.CREATED);
+        savingAccount.setCurrency(Currency.MAD);
         savingAccount.setCustomer(customer);
         savingAccount.setInterestRate(interestRating);
 

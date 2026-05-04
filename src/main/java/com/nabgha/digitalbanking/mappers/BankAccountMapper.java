@@ -16,14 +16,14 @@ public interface BankAccountMapper {
     @Mapping(target = "type", constant = "CURRENT")
     @Mapping(target = "customerId", source = "customer.id")
     @Mapping(target = "customerName", source = "customer.name")
-    @Mapping(target = "interestRate", constant = "0.0")
+    @Mapping(target = "interestRate", expression = "java(null)")
     AccountResponseDTO currentAccountToDto(CurrentAccount currentAccount);
 
     // SavingAccount -> AccountResponseDto
     @Mapping(target = "type", constant = "SAVING")
     @Mapping(target = "customerId", source = "customer.id")
     @Mapping(target = "customerName", source = "customer.name")
-    @Mapping(target = "overDraft", constant = "0.0")
+    @Mapping(target = "overDraft", expression = "java(null)")
     AccountResponseDTO savingAccountToDto(SavingAccount savingAccount);
 
     // BankAccount generic -> dispatch to best mapper

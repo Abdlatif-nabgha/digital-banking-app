@@ -33,7 +33,7 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<CustomerResponseDTO>>> getAll() {
+    public ResponseEntity<ApiResponse<List<CustomerResponseDTO>>> getAll(){
         return ResponseEntity.ok(ApiResponse.success(bankAccountService.listCustomers(), "OK"));
     }
 
