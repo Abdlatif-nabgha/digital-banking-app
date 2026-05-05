@@ -21,5 +21,5 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, UUID> 
     Optional<BankAccount> findByIdAndCustomerId(UUID id, UUID customerId);
 
     @Query("SELECT COUNT(b) FROM BankAccount b WHERE b.customer.id = :customerId AND TYPE(b) = :type")
-    long countByCustomerIdAndType(UUID customerId, String type);
+    long countByCustomerIdAndType(UUID customerId, Class<? extends BankAccount> type);
 }

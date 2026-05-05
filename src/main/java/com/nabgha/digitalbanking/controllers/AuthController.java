@@ -1,5 +1,6 @@
 package com.nabgha.digitalbanking.controllers;
 
+import com.nabgha.digitalbanking.dtos.requests.RefreshTokenRequestDto;
 import com.nabgha.digitalbanking.dtos.responses.AuthResponseDTO;
 import com.nabgha.digitalbanking.dtos.requests.LoginRequestDTO;
 import com.nabgha.digitalbanking.dtos.requests.RegisterRequestDTO;
@@ -62,15 +63,8 @@ public class AuthController {
      */
     @PostMapping("/refresh")
     public ResponseEntity<ApiResponse<AuthResponseDTO>> refresh(
-            @RequestHeader("Authorization") String authHeader) {
-        // Extract the token from the "Authorization: Bearer <token>" header
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(ApiResponse.error("Invalid or missing Authorization header"));
-        }
-        
-        String refreshToken = authHeader.substring(7);
-        AuthResponseDTO response = authService.refresh(refreshToken);
+            @RequestBody RefreshTokenRequestDto dto) {
+        AuthResponseDTO response = authService.refresh(dto.refreshToken());
         return ResponseEntity.ok(ApiResponse.success(response, "Token refreshed"));
     }
 }

@@ -94,4 +94,12 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.FORBIDDEN)
                 .body(ApiResponse.error("Account not verified. Please check your email."));
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse<Void>> handleGeneral(Exception e) {
+        if (e instanceof AccessDeniedException ex) throw ex; // laisse Spring Security gérer
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ApiResponse.error("An unexpected error occurred: " + e.getMessage()));
+    }
 }

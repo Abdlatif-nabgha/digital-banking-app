@@ -181,12 +181,11 @@ public class BankAccountServiceImpl implements BankAccountService {
                 .orElseThrow(() -> new CustomerNotFoundException("Customer not found: " + customerId));
 
         // 2. Business rule check: only one current account allowed
-        long count = bankAccountRepository.countByCustomerIdAndType(customerId, "CurrentAccount");
+        long count = bankAccountRepository.countByCustomerIdAndType(customerId, CurrentAccount.class);
         if (count >= 1) throw new RuntimeException("You already have a current account");
 
         // 3. Initialize new CurrentAccount entity
         CurrentAccount account = new CurrentAccount();
-        account.setId(UUID.randomUUID());
         account.setCreatedAt(LocalDateTime.now());
         account.setBalance(initialBalance);
         account.setStatus(AccountStatus.CREATED);
@@ -206,12 +205,11 @@ public class BankAccountServiceImpl implements BankAccountService {
                 .orElseThrow(() -> new CustomerNotFoundException("Customer not found: " + customerId));
 
         // 2. Business rule check: only one saving account allowed
-        long count = bankAccountRepository.countByCustomerIdAndType(customerId, "SAVING");
+        long count = bankAccountRepository.countByCustomerIdAndType(customerId, SavingAccount.class);
         if (count >= 1) throw new RuntimeException("You already have a saving account");
 
         // 3. Initialize new SavingAccount entity
         SavingAccount account = new SavingAccount();
-        account.setId(UUID.randomUUID());
         account.setCreatedAt(LocalDateTime.now());
         account.setBalance(initialBalance);
         account.setStatus(AccountStatus.CREATED);
