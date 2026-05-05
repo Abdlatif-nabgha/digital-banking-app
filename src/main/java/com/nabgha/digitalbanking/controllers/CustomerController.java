@@ -56,23 +56,21 @@ public class CustomerController {
 
     @PostMapping("/current")
     public ResponseEntity<ApiResponse<AccountResponseDTO>> createCurrent(
-            @RequestParam @Positive(message = "Initial balance must be positive") double initialBalance,
-            @RequestParam @Positive(message = "Overdraft must be positive") double overDraft,
+             @RequestBody @Valid CurrentAccountRequestDTO dto,
             Authentication authentication) throws CustomerNotFoundException {
         UUID customerId = getCustomerId(authentication);
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(
-                bankAccountService.saveCurrentAccount(initialBalance, overDraft, customerId),
+                bankAccountService.saveCurrentAccount(dto.initialBalance(), dto.overDraft(), customerId),
                 "Current account created"));
     }
 
     @PostMapping("/saving")
     public ResponseEntity<ApiResponse<AccountResponseDTO>> createSaving(
-            @RequestParam @Positive(message = "Initial balance must be positive") double initialBalance,
-            @RequestParam @Positive(message = "Interest rate must be positive") double interestRate,
+            @RequestBody @Valid SavingAccountRequestDTO dto,
             Authentication authentication) throws CustomerNotFoundException {
         UUID customerId = getCustomerId(authentication);
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(
-                bankAccountService.saveSavingAccount(initialBalance, interestRate, customerId),
+                bankAccountService.saveSavingAccount(dto.initialBalance(), dto.interestRate(), customerId),
                 "Saving account created"));
     }
 

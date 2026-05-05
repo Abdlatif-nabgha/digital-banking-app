@@ -1,4 +1,4 @@
-package com.nabgha.digitalbanking.dtos.requests;
+package com.nabgha.digitalbanking.dtos.responses;
 
 
 public record AuthResponseDTO(

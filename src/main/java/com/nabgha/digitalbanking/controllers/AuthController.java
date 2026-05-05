@@ -1,6 +1,6 @@
 package com.nabgha.digitalbanking.controllers;
 
-import com.nabgha.digitalbanking.dtos.requests.AuthResponseDTO;
+import com.nabgha.digitalbanking.dtos.responses.AuthResponseDTO;
 import com.nabgha.digitalbanking.dtos.requests.LoginRequestDTO;
 import com.nabgha.digitalbanking.dtos.requests.RegisterRequestDTO;
 import com.nabgha.digitalbanking.dtos.responses.ApiResponse;
