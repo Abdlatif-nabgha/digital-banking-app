@@ -4,6 +4,7 @@ import com.nabgha.digitalbanking.dtos.requests.AuthResponseDTO;
 import com.nabgha.digitalbanking.dtos.requests.LoginRequestDTO;
 import com.nabgha.digitalbanking.dtos.requests.RegisterRequestDTO;
 import com.nabgha.digitalbanking.dtos.responses.ApiResponse;
+import com.nabgha.digitalbanking.dtos.responses.UserResponseDTO;
 import com.nabgha.digitalbanking.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +27,12 @@ public class AuthController {
      * Registers a new user.
      */
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse<Void>> register(
+    public ResponseEntity<ApiResponse<UserResponseDTO>> register(
             @RequestBody @Valid RegisterRequestDTO dto) {
-        authService.register(dto);
+        UserResponseDTO response = authService.register(dto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(ApiResponse.success("Registration successful. Please check your email to verify your account."));
+                .body(ApiResponse.success(response, "Registration successful. Please check your email to verify your account."));
     }
 
     /**

@@ -28,11 +28,18 @@ app:
     secret: ${JWT_SECRET}
     expiration: ${JWT_EXPIRATION}
     refresh-expiration: ${JWT_REFRESH_EXPIRATION}
-    base-url: http://localhost:8080
+  base-url: http://localhost:8080
 server:
   port: 8080
 springdoc:
-  swagger-ui:
-    operations-sorter: method
   api-docs:
     path: /v3/api-docs
+    version: openapi_3_0
+  swagger-ui:
+    path: /swagger-ui.html # Path to access the UI in browser
+    enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+    url: /v3/api-docs
+  packages-to-scan: com.nabgha.digitalbanking.controllers
+

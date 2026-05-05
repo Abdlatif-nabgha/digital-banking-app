@@ -4,6 +4,7 @@ import com.nabgha.digitalbanking.dtos.responses.ApiResponse;
 import com.nabgha.digitalbanking.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,6 +19,13 @@ import java.util.stream.Collectors;
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ApiResponse<Void>> handleAccessDenied(AccessDeniedException e) {
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(ApiResponse.error("You do not have permission to access this resource"));
+    }
 
     @ExceptionHandler(CustomerNotFoundException.class)
     public ResponseEntity<ApiResponse<Void>> handleCustomerNotFound(CustomerNotFoundException e) {
@@ -85,12 +93,5 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.FORBIDDEN)
                 .body(ApiResponse.error("Account not verified. Please check your email."));
-    }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse<Void>> handleGeneralException(Exception e) {
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ApiResponse.error("An unexpected error occurred: " + e.getMessage()));
     }
 }

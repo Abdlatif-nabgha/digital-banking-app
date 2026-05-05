@@ -13,25 +13,32 @@ import java.util.UUID;
 
 public interface BankAccountService {
 
-    ///  CUSTOMER
-    CustomerResponseDTO saveCustomer(CustomerRequestDTO request);
-    CustomerResponseDTO updateCustomer(UUID customerId, CustomerRequestDTO request) throws CustomerNotFoundException;
-    void deleteCustomer(UUID customerId) throws CustomerNotFoundException;
+    // ─────────────────────────────────────────────
+    // ADMIN ONLY
+    // ─────────────────────────────────────────────
     List<CustomerResponseDTO> listCustomers();
     CustomerResponseDTO getCustomer(UUID customerId) throws CustomerNotFoundException;
     List<CustomerResponseDTO> searchCustomers(String keyword);
-
-    /// ACCOUNT
-    AccountResponseDTO saveCurrentAccount(double initialBalance, double overDraft, UUID customerId) throws CustomerNotFoundException;
-    AccountResponseDTO saveSavingAccount(double initialBalance, double interestRating, UUID customerId) throws CustomerNotFoundException;
     List<AccountResponseDTO> listBankAccounts();
-    List<AccountResponseDTO> getAccountsByCustomer(UUID customerId);
     AccountResponseDTO getBankAccount(UUID accountId) throws BankAccountNotFoundException;
     AccountHistoryDTO getAccountHistory(UUID accountId, int page, int size) throws BankAccountNotFoundException;
+    void deleteCustomer(UUID customerId) throws CustomerNotFoundException;
 
-    /// OPERATIONS
+    // ─────────────────────────────────────────────
+    // CUSTOMER ONLY
+    // ─────────────────────────────────────────────
+    List<AccountResponseDTO> getMyAccounts(UUID customerId);
+    AccountHistoryDTO getMyAccountHistory(UUID accountId, UUID customerId, int page, int size) throws BankAccountNotFoundException;
+
+    // ─────────────────────────────────────────────
+    // ADMIN & CUSTOMER
+    // ─────────────────────────────────────────────
+    CustomerResponseDTO saveCustomer(CustomerRequestDTO request);
+    CustomerResponseDTO updateCustomer(UUID customerId, CustomerRequestDTO request) throws CustomerNotFoundException;
+    AccountResponseDTO saveCurrentAccount(double initialBalance, double overDraft, UUID customerId) throws CustomerNotFoundException;
+    AccountResponseDTO saveSavingAccount(double initialBalance, double interestRate, UUID customerId) throws CustomerNotFoundException;
+    List<AccountResponseDTO> getAccountsByCustomer(UUID customerId);
     void debit(UUID accountId, double amount, String description) throws BankAccountNotFoundException, BalanceNotSufficientException;
     void credit(UUID accountId, double amount, String description) throws BankAccountNotFoundException;
     void transfer(UUID sourceId, UUID destinationId, double amount, String description) throws BankAccountNotFoundException, BalanceNotSufficientException;
-
 }

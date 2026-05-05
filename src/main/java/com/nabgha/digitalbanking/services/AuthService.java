@@ -3,6 +3,7 @@ package com.nabgha.digitalbanking.services;
 import com.nabgha.digitalbanking.dtos.requests.AuthResponseDTO;
 import com.nabgha.digitalbanking.dtos.requests.LoginRequestDTO;
 import com.nabgha.digitalbanking.dtos.requests.RegisterRequestDTO;
+import com.nabgha.digitalbanking.dtos.responses.UserResponseDTO;
 import com.nabgha.digitalbanking.entities.AppUser;
 import com.nabgha.digitalbanking.entities.Customer;
 import com.nabgha.digitalbanking.enums.Role;
@@ -45,7 +46,7 @@ public class AuthService {
      * Sends a verification email after successful registration.
      */
     @Transactional
-    public void register(RegisterRequestDTO request) {
+    public UserResponseDTO register(RegisterRequestDTO request) {
         log.info("Processing registration for email: {}", request.email());
 
         // 1. Check if email is already taken
@@ -74,11 +75,21 @@ public class AuthService {
                 .customer(savedCustomer)
                 .build();
 
-        appUserRepository.save(user);
+        AppUser savedUser = appUserRepository.save(user);
 
         // 5. Trigger the verification email asynchronously
         emailService.sendVerificationEmail(request.email(), verificationToken);
         log.info("Registration successful. Verification email sent to: {}", request.email());
+
+        // Return the DTO manually since we already have all the data perfectly separated
+        return new UserResponseDTO(
+                savedUser.getId(),
+                savedUser.getEmail(),
+                request.firstName(),
+                request.lastName(),
+                savedUser.getRole(),
+                savedUser.isEnabled()
+        );
     }
 
     /**

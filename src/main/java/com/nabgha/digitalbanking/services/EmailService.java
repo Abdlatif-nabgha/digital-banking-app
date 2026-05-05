@@ -14,7 +14,7 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    @Value("${app.jwt.base-url}")
+    @Value("${app.base-url}")
     private String baseUrl;
 
     @Value("${spring.mail.username}")
@@ -31,7 +31,7 @@ public class EmailService {
                 "Hello,\n\n" +
                         "Please verify your email by clicking the link below:\n\n" +
                         verificationLink + "\n\n" +
-                        "This link expires in 24 hours.\n\n" +
+                        "This link expires in 15 minutes.\n\n" +
                         "Digital Banking Team"
         );
         mailSender.send(message);
