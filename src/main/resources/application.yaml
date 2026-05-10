@@ -28,13 +28,14 @@ app:
     secret: ${JWT_SECRET}
     expiration: ${JWT_EXPIRATION}
     refresh-expiration: ${JWT_REFRESH_EXPIRATION}
-  base-url: http://localhost:8080
+  base-url: http://localhost:8085
 server:
   port: 8085
 springdoc:
   api-docs:
     path: /v3/api-docs
     version: openapi_3_0
+    enabled: false
   swagger-ui:
     path: /swagger-ui.html # Path to access the UI in browser
     enabled: true
