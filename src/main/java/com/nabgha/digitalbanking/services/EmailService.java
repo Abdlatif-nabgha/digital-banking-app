@@ -7,7 +7,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-@Async
 @Service
 @RequiredArgsConstructor
 public class EmailService {
@@ -20,8 +19,9 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String fromEmail;
 
+    @Async
     public void sendVerificationEmail(String toEmail, String token){
-        String verificationLink = baseUrl + "/auth/verify?token=" + token;
+        String verificationLink = baseUrl + "/api/auth/verify?token=" + token;
 
         SimpleMailMessage message = new  SimpleMailMessage();
         message.setFrom(fromEmail);

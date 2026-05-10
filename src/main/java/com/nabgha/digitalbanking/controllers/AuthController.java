@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * Provides endpoints for registration, login, email verification, and token refresh.
  */
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
 

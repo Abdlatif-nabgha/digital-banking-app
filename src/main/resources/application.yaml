@@ -35,7 +35,6 @@ springdoc:
   api-docs:
     path: /v3/api-docs
     version: openapi_3_0
-    enabled: false
   swagger-ui:
     path: /swagger-ui.html # Path to access the UI in browser
     enabled: true
