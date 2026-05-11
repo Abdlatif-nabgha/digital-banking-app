@@ -188,7 +188,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         CurrentAccount account = new CurrentAccount();
         account.setCreatedAt(LocalDateTime.now());
         account.setBalance(initialBalance);
-        account.setStatus(AccountStatus.CREATED);
+        account.setStatus(AccountStatus.ACTIVATED);
         account.setCurrency(Currency.MAD);
         account.setOverDraft(overDraft);
         account.setCustomer(customer);
@@ -212,7 +212,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         SavingAccount account = new SavingAccount();
         account.setCreatedAt(LocalDateTime.now());
         account.setBalance(initialBalance);
-        account.setStatus(AccountStatus.CREATED);
+        account.setStatus(AccountStatus.ACTIVATED);
         account.setCurrency(Currency.MAD);
         account.setInterestRate(interestRate);
         account.setCustomer(customer);
