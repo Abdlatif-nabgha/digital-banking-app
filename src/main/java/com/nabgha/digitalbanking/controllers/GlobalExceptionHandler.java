@@ -100,6 +100,6 @@ public class GlobalExceptionHandler {
         if (e instanceof AccessDeniedException ex) throw ex; // laisse Spring Security gérer
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ApiResponse.error("An unexpected error occurred: " + e.getMessage()));
+                .body(ApiResponse.error(e.getMessage()));
     }
 }
